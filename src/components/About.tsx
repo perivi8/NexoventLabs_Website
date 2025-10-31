@@ -10,11 +10,7 @@ const About = () => {
     <section id="about" className="py-32 px-6 relative animated-gradient">
       <div className="container mx-auto max-w-6xl" ref={ref}>
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
+          <div>
             <h2 className="text-5xl font-bold mb-6 gradient-text">About Us</h2>
             <div className="glass-card p-8 rounded-2xl">
               <p className="text-lg text-foreground/80 mb-4 leading-relaxed">
@@ -28,14 +24,9 @@ const About = () => {
                 that make a real-world impact.
               </p>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
+          <div className="relative">
             <div className="glass-card p-8 rounded-2xl glow-violet aspect-square flex items-center justify-center">
               <div className="text-center">
                 <motion.div
@@ -74,7 +65,7 @@ const About = () => {
                 <h3 className="text-2xl font-bold gradient-text">AI-Powered Innovation</h3>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

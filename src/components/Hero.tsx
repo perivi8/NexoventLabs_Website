@@ -7,6 +7,7 @@ const Hero = () => {
   const mousePos = useRef({ x: 0, y: 0 });
   const targetRotation = useRef({ x: 0, y: 0 });
   const currentRotation = useRef({ x: 0, y: 0 });
+  const isMobile = useRef(window.innerWidth < 768);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -27,15 +28,16 @@ const Hero = () => {
       vz: number;
     }> = [];
 
-    // Create particle network with more particles for denser neural network effect
-    for (let i = 0; i < 250; i++) {
+    // Create particle network - fewer particles on mobile for better performance
+    const particleCount = isMobile.current ? 100 : 200;
+    for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width - canvas.width / 2,
         y: Math.random() * canvas.height - canvas.height / 2,
         z: Math.random() * 1000,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        vz: (Math.random() - 0.5) * 0.5,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        vz: (Math.random() - 0.5) * 0.3,
       });
     }
 
@@ -45,20 +47,35 @@ const Hero = () => {
         y: (e.clientY / window.innerHeight - 0.5) * 2,
       };
       targetRotation.current = {
-        x: mousePos.current.y * 0.3,
-        y: mousePos.current.x * 0.3,
+        x: mousePos.current.y * 0.1,
+        y: mousePos.current.x * 0.1,
       };
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        mousePos.current = {
+          x: (touch.clientX / window.innerWidth - 0.5) * 2,
+          y: (touch.clientY / window.innerHeight - 0.5) * 2,
+        };
+        targetRotation.current = {
+          x: mousePos.current.y * 0.1,
+          y: mousePos.current.x * 0.1,
+        };
+      }
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     const animate = () => {
-      ctx.fillStyle = 'rgba(11, 11, 13, 0.1)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Smooth rotation interpolation
-      currentRotation.current.x += (targetRotation.current.x - currentRotation.current.x) * 0.05;
-      currentRotation.current.y += (targetRotation.current.y - currentRotation.current.y) * 0.05;
+      // Smooth rotation interpolation - slower for less blur
+      currentRotation.current.x += (targetRotation.current.x - currentRotation.current.x) * 0.02;
+      currentRotation.current.y += (targetRotation.current.y - currentRotation.current.y) * 0.02;
 
       particles.forEach((particle, i) => {
         // Apply rotation based on mouse position
@@ -128,12 +145,14 @@ const Hero = () => {
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      isMobile.current = window.innerWidth < 768;
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -143,7 +162,7 @@ const Hero = () => {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ background: '#0B0B0D' }}
+        style={{ background: '#000000' }}
       />
 
       <div className="relative z-10 text-center px-6 max-w-5xl">

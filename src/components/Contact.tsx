@@ -72,24 +72,15 @@ const Contact = () => {
   return (
     <section id="contact" className="py-32 px-6 relative">
       <div className="container mx-auto max-w-6xl" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <h2 className="text-5xl font-bold mb-6 gradient-text">Get In Touch</h2>
           <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
             Ready to transform your business with AI? Let's talk.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <div className="glass-card p-8 rounded-2xl shine hover:glow-violet transition-all duration-500 hover:scale-[1.02]">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -144,25 +135,16 @@ const Contact = () => {
                 </Button>
               </form>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6">
             {contactInfo.map((info, index) => (
-              <motion.a
+              <a
                 key={info.label}
                 href={info.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                whileHover={{ scale: 1.05, x: 10 }}
-                className="glass-card p-6 rounded-2xl flex items-center gap-6 group cursor-pointer shine hover:glow-violet transition-all duration-300"
+                className="glass-card p-6 rounded-2xl flex items-center gap-6 group cursor-pointer shine hover:glow-violet transition-all duration-300 block"
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center glow-violet group-hover:glow-violet-intense transition-all duration-300">
                   <info.icon className="w-6 h-6 text-primary" />
@@ -173,16 +155,10 @@ const Contact = () => {
                     {info.value}
                   </p>
                 </div>
-              </motion.a>
+              </a>
             ))}
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              whileHover={{ scale: 1.02 }}
-              className="glass-card p-6 rounded-2xl shine hover:glow-violet transition-all duration-300"
-            >
+            <div className="glass-card p-6 rounded-2xl shine hover:glow-violet transition-all duration-300">
               <h3 className="text-xl font-bold mb-4 gradient-text">Follow Us</h3>
               <div className="flex gap-4">
                 <motion.a
@@ -213,8 +189,8 @@ const Contact = () => {
                   <Linkedin className="w-5 h-5 text-primary" />
                 </motion.a>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

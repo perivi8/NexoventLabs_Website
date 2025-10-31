@@ -47,40 +47,44 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
-  /* Glassmorphism utilities */
+  /* Glassmorphism utilities - optimized for performance */
   .glass {
     background: rgba(15, 15, 25, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(106, 47, 232, 0.2);
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   .glass-card {
     background: rgba(20, 20, 35, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(106, 47, 232, 0.15);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   .glass-card:hover {
     background: rgba(20, 20, 35, 0.6);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(106, 47, 232, 0.4);
   }
 
-  /* Glow effects */
+  /* Glow effects - optimized */
   .glow-violet {
     box-shadow: 0 0 20px rgba(106, 47, 232, 0.3),
-                0 0 40px rgba(106, 47, 232, 0.2),
-                0 0 60px rgba(106, 47, 232, 0.1);
+                0 0 40px rgba(106, 47, 232, 0.2);
+    transform: translateZ(0);
   }
 
   .glow-violet-intense {
     box-shadow: 0 0 30px rgba(106, 47, 232, 0.6),
-                0 0 60px rgba(106, 47, 232, 0.4),
-                0 0 90px rgba(106, 47, 232, 0.2);
+                0 0 60px rgba(106, 47, 232, 0.4);
+    transform: translateZ(0);
   }
 
   .text-glow {
@@ -99,7 +103,7 @@ All colors MUST be HSL.
     padding-bottom: 0.1em;
   }
 
-  /* Animated gradient background */
+  /* Animated gradient background - optimized */
   .animated-gradient {
     background: linear-gradient(
       135deg,
@@ -109,6 +113,8 @@ All colors MUST be HSL.
     );
     background-size: 200% 200%;
     animation: gradient-shift 8s ease infinite;
+    will-change: background-position;
+    transform: translateZ(0);
   }
 
   @keyframes gradient-shift {
@@ -185,7 +191,6 @@ All colors MUST be HSL.
 @layer base {
   * {
     @apply border-border;
-    cursor: none !important;
   }
 
   html {
@@ -194,11 +199,21 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    cursor: none !important;
   }
 
-  /* Hide system cursor on all interactive elements */
-  a, button, input, textarea, select {
-    cursor: none !important;
+  /* Hide system cursor only on desktop - TEMPORARILY DISABLED */
+  /* @media (min-width: 768px) {
+    * {
+      cursor: none !important;
+    }
+    
+    a, button, input, textarea, select {
+      cursor: none !important;
+    }
+  } */
+  
+  /* Performance optimizations */
+  img, video {
+    content-visibility: auto;
   }
 }

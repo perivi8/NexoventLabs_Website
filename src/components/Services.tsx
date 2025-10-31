@@ -43,26 +43,17 @@ const Services = () => {
   return (
     <section id="services" className="py-32 px-6 relative">
       <div className="container mx-auto max-w-7xl" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <h2 className="text-5xl font-bold mb-6 gradient-text">Our Services</h2>
           <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
             Comprehensive AI solutions tailored to your business objectives
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div
+            <div
               key={service.title}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05, rotateY: 5 }}
               className="glass-card p-8 rounded-2xl shine cursor-pointer group"
             >
               <div className="mb-6 relative">
@@ -74,7 +65,7 @@ const Services = () => {
                 {service.title}
               </h3>
               <p className="text-foreground/70 leading-relaxed">{service.description}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

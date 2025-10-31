@@ -1,103 +1,66 @@
-import { useEffect, useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef, useCallback } from 'react';
 
 const CustomCursor = () => {
   const [isHovering, setIsHovering] = useState(false);
   const cursorOuterRef = useRef<HTMLDivElement>(null);
   const cursorInnerRef = useRef<HTMLDivElement>(null);
-  const requestRef = useRef<number>();
-  const mousePosition = useRef({ x: 0, y: 0 });
-  const currentPosition = useRef({ x: 0, y: 0 });
+  const lastHoverCheck = useRef<number>(0);
+
+  // Throttled hover check to reduce performance overhead
+  const checkHoverState = useCallback((target: HTMLElement) => {
+    const now = Date.now();
+    if (now - lastHoverCheck.current < 50) return; // Throttle to 20fps
+    lastHoverCheck.current = now;
+
+    const isInteractive = target.tagName === 'BUTTON' || 
+                         target.tagName === 'A' || 
+                         target.closest('button') || 
+                         target.closest('a');
+    setIsHovering(!!isInteractive);
+  }, []);
 
   useEffect(() => {
+    // Direct style manipulation for maximum performance
     const updateMousePosition = (e: MouseEvent) => {
-      mousePosition.current = { x: e.clientX, y: e.clientY };
-    };
-
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'BUTTON' || target.tagName === 'A' || target.closest('button') || target.closest('a')) {
-        setIsHovering(true);
-      }
-    };
-
-    const handleMouseOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'BUTTON' || target.tagName === 'A' || target.closest('button') || target.closest('a')) {
-        setIsHovering(false);
-      }
-    };
-
-    // Smooth cursor animation using requestAnimationFrame
-    const animateCursor = () => {
-      // Smooth interpolation for lag-free movement
-      const lerp = (start: number, end: number, factor: number) => {
-        return start + (end - start) * factor;
-      };
-
-      currentPosition.current.x = lerp(currentPosition.current.x, mousePosition.current.x, 1);
-      currentPosition.current.y = lerp(currentPosition.current.y, mousePosition.current.y, 1);
-
       if (cursorOuterRef.current) {
-        cursorOuterRef.current.style.transform = `translate3d(${currentPosition.current.x - 16}px, ${currentPosition.current.y - 16}px, 0)`;
+        cursorOuterRef.current.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0)`;
       }
-
       if (cursorInnerRef.current) {
-        cursorInnerRef.current.style.transform = `translate3d(${currentPosition.current.x - 4}px, ${currentPosition.current.y - 4}px, 0)`;
+        cursorInnerRef.current.style.transform = `translate3d(${e.clientX - 4}px, ${e.clientY - 4}px, 0)`;
       }
-
-      requestRef.current = requestAnimationFrame(animateCursor);
+      
+      // Check hover state with throttling
+      checkHoverState(e.target as HTMLElement);
     };
 
-    window.addEventListener('mousemove', updateMousePosition);
-    document.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseout', handleMouseOut);
-    requestRef.current = requestAnimationFrame(animateCursor);
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
-      document.removeEventListener('mouseover', handleMouseOver);
-      document.removeEventListener('mouseout', handleMouseOut);
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current);
-      }
     };
-  }, []);
+  }, [checkHoverState]);
 
   return (
     <>
-      <motion.div
+      <div
         ref={cursorOuterRef}
-        className="fixed w-8 h-8 border-2 border-primary rounded-full pointer-events-none z-50 mix-blend-screen hidden md:block"
+        className="fixed w-8 h-8 border-2 border-primary rounded-full pointer-events-none z-50 mix-blend-screen hidden md:block transition-transform duration-200 ease-out"
         style={{
           left: 0,
           top: 0,
           willChange: 'transform',
-        }}
-        animate={{
-          scale: isHovering ? 1.5 : 1,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 500,
-          damping: 28,
+          transform: isHovering ? 'scale(1.5)' : 'scale(1)',
         }}
       />
-      <motion.div
+      <div
         ref={cursorInnerRef}
-        className="fixed w-2 h-2 bg-primary rounded-full pointer-events-none z-50 glow-violet hidden md:block"
+        className="fixed w-2 h-2 bg-primary rounded-full pointer-events-none z-50 hidden md:block transition-transform duration-200 ease-out"
         style={{
           left: 0,
           top: 0,
           willChange: 'transform',
-        }}
-        animate={{
-          scale: isHovering ? 2 : 1,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 500,
-          damping: 28,
+          transform: isHovering ? 'scale(2)' : 'scale(1)',
+          boxShadow: '0 0 20px rgba(106, 47, 232, 0.3), 0 0 40px rgba(106, 47, 232, 0.2)',
         }}
       />
     </>

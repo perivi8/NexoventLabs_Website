@@ -33,26 +33,17 @@ const Team = () => {
   return (
     <section id="team" className="py-32 px-6 relative">
       <div className="container mx-auto max-w-7xl" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <h2 className="text-5xl font-bold mb-6 gradient-text">Our Team</h2>
           <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
             Meet the brilliant minds driving AI innovation
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {team.map((member, index) => (
-            <motion.div
+            <div
               key={member.name}
-              initial={{ opacity: 0, y: 50, rotateY: -10 }}
-              animate={isInView ? { opacity: 1, y: 0, rotateY: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05, rotateY: 5 }}
               className="glass-card rounded-2xl overflow-hidden group cursor-pointer shine hover:glow-violet transition-all duration-300"
             >
               <div className="aspect-square bg-gradient-to-br from-primary/30 to-primary/10 relative overflow-hidden flex items-center justify-center">
@@ -90,7 +81,7 @@ const Team = () => {
                   </motion.button>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

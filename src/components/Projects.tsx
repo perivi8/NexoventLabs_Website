@@ -37,27 +37,18 @@ const Projects = () => {
   return (
     <section id="projects" className="py-32 px-6 relative animated-gradient">
       <div className="container mx-auto max-w-7xl" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <h2 className="text-5xl font-bold mb-6 gradient-text">Featured Projects</h2>
           <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
             Showcasing our most impactful AI implementations
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <motion.div
+            <div
               key={project.title}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              whileHover={{ scale: 1.02 }}
-              className="glass-card rounded-2xl overflow-hidden group cursor-pointer shine hover:glow-violet transition-all duration-500"
+              className="rounded-2xl overflow-hidden group cursor-pointer bg-card border border-border hover:border-primary/40 transition-all duration-300"
             >
               <div className={`h-64 bg-gradient-to-br ${project.gradient} relative flex items-center justify-center`}>
                 <motion.div
@@ -79,7 +70,7 @@ const Projects = () => {
                 </h3>
                 <p className="text-foreground/70 leading-relaxed">{project.description}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
