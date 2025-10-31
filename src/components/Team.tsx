@@ -9,24 +9,14 @@ const Team = () => {
 
   const team = [
     {
-      name: 'Dr. Sarah Chen',
+      name: 'Perivi Harikrishna',
       role: 'Chief AI Officer',
       expertise: 'Deep Learning & Neural Networks',
     },
     {
-      name: 'Marcus Rodriguez',
+      name: 'Gali Vijay',
       role: 'Lead ML Engineer',
       expertise: 'Computer Vision & Robotics',
-    },
-    {
-      name: 'Emily Thompson',
-      role: 'Head of Research',
-      expertise: 'NLP & Language Models',
-    },
-    {
-      name: 'David Kim',
-      role: 'AI Architect',
-      expertise: 'Distributed Systems & MLOps',
     },
   ];
 
@@ -40,7 +30,7 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {team.map((member, index) => (
             <div
               key={member.name}

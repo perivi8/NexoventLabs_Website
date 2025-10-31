@@ -67,8 +67,9 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <motion.div
-          className="text-2xl font-bold gradient-text"
+          className="text-2xl font-bold gradient-text cursor-pointer"
           whileHover={{ scale: 1.05 }}
+          onClick={() => scrollToSection('#home')}
         >
           Nexovent Labs
         </motion.div>

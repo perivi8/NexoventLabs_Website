@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Brain, Cpu, Database, Shield, Sparkles, Zap } from 'lucide-react';
+import { Brain, Cpu, Database, Globe, Sparkles, Zap } from 'lucide-react';
 
 const Services = () => {
   const ref = useRef(null);
@@ -29,9 +29,9 @@ const Services = () => {
       description: 'Streamline operations with intelligent automation systems.',
     },
     {
-      icon: Shield,
-      title: 'AI Security',
-      description: 'Protect your systems with AI-powered security solutions.',
+      icon: Globe,
+      title: 'Website Development',
+      description: 'Modern, responsive websites built with cutting-edge technologies.',
     },
     {
       icon: Zap,
