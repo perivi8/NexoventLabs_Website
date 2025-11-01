@@ -122,9 +122,9 @@ const Contact = () => {
         </div>
 
         {/* Second Section: Contact Details and GIF */}
-        <div className="grid md:grid-cols-2 gap-12 mb-12">
+        <div className="grid md:grid-cols-2 gap-12 mb-12 items-center">
           {/* Contact Details */}
-          <div className="space-y-6">
+          <div className="space-y-6 mx-auto w-full max-w-md md:max-w-none">
             {/* Contact Info Cards */}
             {contactInfo.map((info, index) => (
               <a
@@ -149,7 +149,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Us GIF */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center mx-auto w-full max-w-md md:max-w-none">
             <img 
               src="/contactus.gif" 
               alt="Contact Us" 

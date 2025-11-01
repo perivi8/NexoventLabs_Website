@@ -27,6 +27,8 @@ const Chatbot = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<'checking' | 'connected' | 'disconnected'>('checking');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatbotRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -35,6 +37,26 @@ const Chatbot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Close chatbot when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        chatbotRef.current &&
+        buttonRef.current &&
+        !chatbotRef.current.contains(event.target as Node) &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   // Check backend connection on mount - prioritizes env variable, then production, then localhost
   useEffect(() => {
@@ -173,6 +195,7 @@ const Chatbot = () => {
     <>
       {/* Chatbot Toggle Button */}
       <motion.div
+        ref={buttonRef}
         className="fixed bottom-3 right-1 md:right-6 z-50"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -213,10 +236,11 @@ const Chatbot = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 100, scale: 0.8 }}
+            ref={chatbotRef}
+            initial={{ opacity: 1, y: 0, scale: 1 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+            transition={{ duration: 0 }}
             className="fixed bottom-24 right-3 md:right-6 z-50 w-[400px] max-w-[calc(100vw-24px)] h-[500px] glass-card rounded-2xl shadow-2xl glow-violet flex flex-col overflow-hidden"
           >
             {/* Header */}
