@@ -13,7 +13,7 @@ const WhatsAppButton = () => {
 
   return (
     <motion.div
-      className="fixed bottom-8 left-6 z-50"
+      className="fixed bottom-8 left-2 md:bottom-8 md:left-6 z-50"
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}
