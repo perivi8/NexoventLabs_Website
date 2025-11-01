@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Brain, Cpu, Database, Globe, Sparkles, Zap } from 'lucide-react';
+import { Brain, Cpu, Database, Globe, Sparkles, Zap, Monitor, Smartphone, MessageSquare, Cloud, Settings, Wrench } from 'lucide-react';
 
 const Services = () => {
   const ref = useRef(null);
@@ -9,34 +9,80 @@ const Services = () => {
 
   const services = [
     {
-      icon: Brain,
-      title: 'Machine Learning',
-      description: 'Advanced ML models that learn and adapt to your business needs.',
+      icon: Monitor,
+      title: 'Web Development',
+      items: [
+        'Custom Website Development (React, Angular, Vite)',
+        'Full-Stack Web Apps (Frontend + Backend)',
+        'Portfolio, Business, and E-Commerce Websites',
+        'API Integration & Development (Node.js, Flask)',
+      ],
     },
     {
-      icon: Cpu,
-      title: 'Neural Networks',
-      description: 'Deep learning solutions for complex pattern recognition.',
+      icon: Smartphone,
+      title: 'Mobile App Development',
+      items: [
+        'Cross-Platform App Development (React Native)',
+        'Backend-Powered Mobile Apps (Supabase, SQL)',
+        'App Maintenance & Updates',
+      ],
+    },
+    {
+      icon: MessageSquare,
+      title: 'Chatbot & AI Integration',
+      items: [
+        'Website Chatbots (Custom AI / OpenAI API)',
+        'Customer Support Chatbots',
+        'Lead Generation Chatbots',
+        'Workflow Automation (automated responses, form handling, etc.)',
+      ],
+    },
+    {
+      icon: Brain,
+      title: 'Machine Learning & AI Solutions',
+      items: [
+        'Predictive Analytics & Data Modeling',
+        'Computer Vision (YOLO, TensorFlow)',
+        'Natural Language Processing (NLP)',
+        'Model Deployment & Integration',
+      ],
     },
     {
       icon: Database,
-      title: 'Data Analytics',
-      description: 'Transform raw data into actionable business intelligence.',
+      title: 'Database & Backend Solutions',
+      items: [
+        'Database Design (MongoDB, PostgreSQL, MySQL)',
+        'Cloud Backend Setup (Supabase)',
+        'API Development & Integration',
+      ],
     },
     {
-      icon: Sparkles,
-      title: 'AI Automation',
-      description: 'Streamline operations with intelligent automation systems.',
+      icon: Cloud,
+      title: 'Deployment & DevOps',
+      items: [
+        'Website & App Deployment (Render, Vercel, Netlify)',
+        'Continuous Integration / Continuous Deployment (CI/CD)',
+        'Git & GitHub Version Control Setup',
+      ],
     },
     {
-      icon: Globe,
-      title: 'Website Development',
-      description: 'Modern, responsive websites built with cutting-edge technologies.',
+      icon: Settings,
+      title: 'Automation & Workflow Tools',
+      items: [
+        'Website Chatbots with Auto-Trigger',
+        'WhatsApp Bots with Automated Responses',
+        'Automated Business Workflows',
+        'Custom Dashboards and Admin Panels',
+      ],
     },
     {
-      icon: Zap,
-      title: 'Real-time Processing',
-      description: 'Lightning-fast AI inference for real-time applications.',
+      icon: Wrench,
+      title: 'Maintenance & Support',
+      items: [
+        'Bug Fixes & Performance Optimization',
+        'Security & Backup Services',
+        'Regular Updates & Feature Enhancements',
+      ],
     },
   ];
 
@@ -46,7 +92,7 @@ const Services = () => {
         <div className="text-center mb-20">
           <h2 className="text-5xl font-bold mb-6 gradient-text">Our Services</h2>
           <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-            Comprehensive AI solutions tailored to your business objectives
+            Comprehensive development and AI solutions tailored to your business needs
           </p>
         </div>
 
@@ -64,7 +110,14 @@ const Services = () => {
               <h3 className="text-2xl font-bold mb-4 text-foreground group-hover:gradient-text transition-all duration-300">
                 {service.title}
               </h3>
-              <p className="text-foreground/70 leading-relaxed">{service.description}</p>
+              <ul className="space-y-2">
+                {service.items.map((item, idx) => (
+                  <li key={idx} className="text-foreground/70 leading-relaxed text-sm flex items-start">
+                    <span className="mr-2 text-primary mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

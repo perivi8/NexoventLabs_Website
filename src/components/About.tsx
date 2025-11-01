@@ -14,14 +14,14 @@ const About = () => {
             <h2 className="text-5xl font-bold mb-6 gradient-text">About Us</h2>
             <div className="glass-card p-8 rounded-2xl">
               <p className="text-lg text-foreground/80 mb-4 leading-relaxed">
-                At Nexovent Labs, we're pioneering the future of artificial intelligence. 
-                Our mission is to transform businesses through innovative AI solutions that 
-                drive growth, efficiency, and unprecedented insights.
+                We offer exceptional web development services to create responsive, intuitive, 
+                and visually stunning websites. We specialize in seamless navigation, optimized 
+                performance, and innovative designs tailored to your brand.
               </p>
               <p className="text-lg text-foreground/80 leading-relaxed">
-                Founded by a team of AI researchers and industry veterans, we combine 
-                cutting-edge research with practical applications to deliver solutions 
-                that make a real-world impact.
+                Whether you need dynamic e-commerce platforms, corporate websites, or creative 
+                portfolios, our cutting-edge solutions bring your vision to life. Empower your 
+                online presence and captivate your audience with our expertise.
               </p>
             </div>
           </div>
