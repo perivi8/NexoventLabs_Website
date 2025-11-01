@@ -80,9 +80,9 @@ const Contact = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <div className="glass-card p-8 rounded-2xl shine hover:glow-violet transition-all duration-500 hover:scale-[1.02]">
-              <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="flex flex-col">
+            <div className="glass-card p-8 rounded-2xl flex-1 flex flex-col">
+              <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
                 <div>
                   <Input
                     placeholder="Your Name"
@@ -114,14 +114,13 @@ const Contact = () => {
                     className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet"
                   />
                 </div>
-                <div>
+                <div className="flex-1 flex flex-col">
                   <Textarea
                     placeholder="Your Message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     required
-                    rows={6}
-                    className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet resize-none"
+                    className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet resize-none flex-1 h-full"
                   />
                 </div>
                 <Button

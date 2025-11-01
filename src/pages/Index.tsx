@@ -2,6 +2,8 @@ import { lazy, Suspense } from 'react';
 import CustomCursor from '@/components/CustomCursor';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import Chatbot from '@/components/Chatbot';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 // Lazy load components below the fold for better performance
 const About = lazy(() => import('@/components/About'));
@@ -31,6 +33,8 @@ const Index = () => {
       <Suspense fallback={<div />}>
         <Footer />
       </Suspense>
+      <WhatsAppButton />
+      <Chatbot />
     </div>
   );
 };
