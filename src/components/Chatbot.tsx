@@ -36,13 +36,13 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Check backend connection on mount - tries both localhost and production
+  // Check backend connection on mount - prioritizes env variable, then production, then localhost
   useEffect(() => {
     const checkConnection = async () => {
       const urls = [
-        'http://localhost:3001',
+        import.meta.env.VITE_API_URL,
         'https://nexoventlabs-backend.onrender.com',
-        import.meta.env.VITE_API_URL
+        'http://localhost:3001'
       ].filter(Boolean);
 
       for (const apiUrl of urls) {
@@ -84,13 +84,13 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
-      // Try multiple backend URLs in order: stored working URL, localhost, production, env variable
+      // Try multiple backend URLs in order: stored working URL, env variable, production, localhost
       const storedUrl = sessionStorage.getItem('chatbot_api_url');
       const urls = [
         storedUrl,
-        'http://localhost:3001',
+        import.meta.env.VITE_API_URL,
         'https://nexoventlabs-backend.onrender.com',
-        import.meta.env.VITE_API_URL
+        'http://localhost:3001'
       ].filter(Boolean);
 
       // Send conversation history for context (last 5 messages)
@@ -151,7 +151,7 @@ const Chatbot = () => {
       setConnectionStatus('disconnected');
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Sorry, I encountered an error connecting to the server. I tried both localhost (http://localhost:3001) and production (https://nexoventlabs-backend.onrender.com). Please ensure at least one backend is running or contact us at nexoventlabs@gmail.com',
+        text: 'Sorry, I encountered an error connecting to the server. Please ensure the backend is running or contact us at nexoventlabs@gmail.com for assistance.',
         sender: 'bot',
         timestamp: new Date(),
       };
