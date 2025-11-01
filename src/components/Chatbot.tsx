@@ -180,7 +180,7 @@ const Chatbot = () => {
       >
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="h-16 w-16 rounded-full glass glow-violet-intense shadow-2xl hover:scale-110 transition-all duration-300"
+          className="h-24 w-24 rounded-full bg-transparent border-0 hover:bg-transparent hover:scale-110 transition-all duration-300 p-0"
           size="icon"
         >
           <AnimatePresence mode="wait">
@@ -202,7 +202,7 @@ const Chatbot = () => {
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <Sparkles className="h-6 w-6" />
+                <img src="/AI.gif" alt="AI Assistant" className="h-24 w-24" />
               </motion.div>
             )}
           </AnimatePresence>

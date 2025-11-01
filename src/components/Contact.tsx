@@ -17,10 +17,15 @@ const Contact = () => {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showLoadingGif, setShowLoadingGif] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setShowLoadingGif(true);
+
+    const startTime = Date.now();
+    const minDisplayTime = 2000; // Minimum 2 seconds
 
     try {
       const apiUrl = import.meta.env.VITE_API_URL || 'https://nexoventlabs-backend.onrender.com';
@@ -34,6 +39,15 @@ const Contact = () => {
 
       const data = await response.json();
 
+      // Calculate remaining time to show the GIF
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
+
+      // Wait for the remaining time before hiding the GIF
+      await new Promise(resolve => setTimeout(resolve, remainingTime));
+
+      setShowLoadingGif(false);
+
       if (response.ok && data.success) {
         toast.success('Message sent! We\'ll get back to you soon.');
         setFormData({ name: '', email: '', phone: '', message: '' });
@@ -42,6 +56,15 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Error sending message:', error);
+      
+      // Calculate remaining time to show the GIF
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
+
+      // Wait for the remaining time before hiding the GIF
+      await new Promise(resolve => setTimeout(resolve, remainingTime));
+
+      setShowLoadingGif(false);
       toast.error('Failed to send message. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
@@ -71,6 +94,25 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-32 px-6 relative">
+      {/* Loading GIF Overlay */}
+      {showLoadingGif && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            className="flex flex-col items-center gap-4"
+          >
+            <img 
+              src="/send.gif" 
+              alt="Sending message..." 
+              className="w-48 h-48 object-contain"
+            />
+            <p className="text-white text-xl font-semibold">Sending your message...</p>
+          </motion.div>
+        </div>
+      )}
+
       <div className="container mx-auto max-w-6xl" ref={ref}>
         <div className="text-center mb-20">
           <h2 className="text-5xl font-bold mb-6 gradient-text">Get In Touch</h2>
