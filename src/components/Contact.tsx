@@ -121,77 +121,24 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="flex flex-col">
-            <div className="glass-card p-8 rounded-2xl flex-1 flex flex-col">
-              <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
-                <div>
-                  <Input
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                    className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet"
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                    className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet"
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="tel"
-                    placeholder="Your Phone Number"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    required
-                    pattern="[0-9\s\-\+\(\)]+"
-                    minLength={10}
-                    className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet"
-                  />
-                </div>
-                <div className="flex-1 flex flex-col">
-                  <Textarea
-                    placeholder="Your Message"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    required
-                    className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet resize-none flex-1 h-full"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full glass glow-violet-intense hover:scale-105 transition-all duration-300 shine disabled:opacity-50 disabled:cursor-not-allowed"
-                  size="lg"
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                  <Send className="w-4 h-4 ml-2" />
-                </Button>
-              </form>
-            </div>
-          </div>
-
+        {/* Second Section: Contact Details and GIF */}
+        <div className="grid md:grid-cols-2 gap-12 mb-12">
+          {/* Contact Details */}
           <div className="space-y-6">
+            {/* Contact Info Cards */}
             {contactInfo.map((info, index) => (
               <a
                 key={info.label}
                 href={info.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card p-6 rounded-2xl flex items-center gap-6 group cursor-pointer shine hover:glow-violet transition-all duration-300 block"
+                className="glass-card p-6 rounded-2xl flex items-start gap-6 group cursor-pointer shine hover:glow-violet transition-all duration-300 block"
               >
-                <div className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center glow-violet group-hover:glow-violet-intense transition-all duration-300">
+                <div className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center glow-violet group-hover:glow-violet-intense transition-all duration-300 flex-shrink-0">
                   <info.icon className="w-6 h-6 text-primary" />
                 </div>
-                <div>
-                  <p className="text-sm text-foreground/60 mb-1">{info.label}</p>
+                <div className="flex-1">
+                  <p className="text-sm text-foreground/60 mb-2">{info.label}</p>
                   <p className="text-lg font-semibold group-hover:gradient-text transition-all duration-300">
                     {info.value}
                   </p>
@@ -199,39 +146,74 @@ const Contact = () => {
               </a>
             ))}
 
-            <div className="glass-card p-6 rounded-2xl shine hover:glow-violet transition-all duration-300">
-              <h3 className="text-xl font-bold mb-4 gradient-text">Follow Us</h3>
-              <div className="flex gap-4">
-                <motion.a
-                  href="https://twitter.com/nexoventlabs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center glow-violet hover:glow-violet-intense transition-all duration-300"
-                >
-                  <Twitter className="w-5 h-5 text-primary" />
-                </motion.a>
-                <motion.a
-                  href="https://instagram.com/nexoventlabs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center glow-violet hover:glow-violet-intense transition-all duration-300"
-                >
-                  <Instagram className="w-5 h-5 text-primary" />
-                </motion.a>
-                <motion.a
-                  href="https://linkedin.com/company/nexoventlabs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center glow-violet hover:glow-violet-intense transition-all duration-300"
-                >
-                  <Linkedin className="w-5 h-5 text-primary" />
-                </motion.a>
+          </div>
+
+          {/* Contact Us GIF */}
+          <div className="flex items-center justify-center">
+            <img 
+              src="/contactus.gif" 
+              alt="Contact Us" 
+              className="w-full h-auto max-w-md object-contain"
+            />
+          </div>
+        </div>
+
+        {/* Third Section: Full Width Form */}
+        <div className="glass-card p-8 rounded-2xl">
+          <h3 className="text-3xl font-bold mb-8 gradient-text text-center">Send Us a Message</h3>
+          <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <Input
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                  className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet"
+                />
+              </div>
+              <div>
+                <Input
+                  type="email"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  required
+                  className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet"
+                />
               </div>
             </div>
-          </div>
+            <div>
+              <Input
+                type="tel"
+                placeholder="Your Phone Number"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                required
+                pattern="[0-9\s\-\+\(\)]+"
+                minLength={10}
+                className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet"
+              />
+            </div>
+            <div>
+              <Textarea
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                required
+                className="glass-card border-primary/30 focus:border-primary focus:ring-primary glow-violet resize-none min-h-[200px]"
+              />
+            </div>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full glass glow-violet-intense hover:scale-105 transition-all duration-300 shine disabled:opacity-50 disabled:cursor-not-allowed"
+              size="lg"
+            >
+              {isSubmitting ? 'Sending...' : 'Send Message'}
+              <Send className="w-4 h-4 ml-2" />
+            </Button>
+          </form>
         </div>
       </div>
     </section>

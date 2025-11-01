@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   const footerLinks = {
@@ -18,9 +19,39 @@ const Footer = () => {
             >
               Nexovent Labs
             </motion.h3>
-            <p className="text-foreground/60 text-sm leading-relaxed">
+            <p className="text-foreground/60 text-sm leading-relaxed mb-6">
               Empowering businesses with next-generation AI solutions.
             </p>
+            {/* Social Media Icons */}
+            <div className="flex gap-3">
+              <motion.a
+                href="https://twitter.com/nexoventlabs"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center hover:bg-primary/30 transition-all duration-300"
+              >
+                <Twitter className="w-4 h-4 text-primary" />
+              </motion.a>
+              <motion.a
+                href="https://instagram.com/nexoventlabs"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center hover:bg-primary/30 transition-all duration-300"
+              >
+                <Instagram className="w-4 h-4 text-primary" />
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com/company/nexoventlabs"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1 }}
+                className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center hover:bg-primary/30 transition-all duration-300"
+              >
+                <Linkedin className="w-4 h-4 text-primary" />
+              </motion.a>
+            </div>
           </div>
 
           {Object.entries(footerLinks).map(([category, links]) => (
