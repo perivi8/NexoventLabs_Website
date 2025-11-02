@@ -10,7 +10,7 @@ const Footer = () => {
 
   return (
     <footer className="relative py-16 px-6 glass border-t border-primary/20">
-      <div className="container mx-auto max-w-7xl">
+      <div className="container mx-auto max-w-7xl px-0">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div>
             <motion.h3

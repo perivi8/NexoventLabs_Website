@@ -13,11 +13,6 @@ const Team = () => {
       role: 'Chief AI Officer',
       expertise: 'Deep Learning & Neural Networks',
     },
-    {
-      name: 'Gali Vijay',
-      role: 'Lead ML Engineer',
-      expertise: 'Computer Vision & Robotics',
-    },
   ];
 
   return (
