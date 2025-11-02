@@ -30,7 +30,7 @@ const Hero = () => {
     }> = [];
 
     // Create particle network - fewer particles on mobile for better performance
-    const particleCount = isMobile.current ? 150 : 300;
+    const particleCount = isMobile.current ? 250 : 500;
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width * 1.5 - canvas.width * 0.75,
@@ -76,48 +76,31 @@ const Hero = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     const animate = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+      // Use fully opaque black to prevent fade-out and disappearing
+      ctx.fillStyle = 'rgba(0, 0, 0, 1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Smooth rotation interpolation - slower for less blur
-      currentRotation.current.x += (targetRotation.current.x - currentRotation.current.x) * 0.02;
-      currentRotation.current.y += (targetRotation.current.y - currentRotation.current.y) * 0.02;
-
-      // Apply scroll-based offset to the network
-      // Calculate scroll progress relative to hero section height
-      const heroHeight = window.innerHeight;
-      const scrollProgress = Math.min(scrollOffset.current / heroHeight, 1);
-      const scrollInfluence = scrollOffset.current * 0.3;
-      
-      // Smooth transition factor - network moves away when leaving hero, returns when back
-      const transitionFactor = scrollProgress;
+      // Smooth rotation interpolation - increased for better responsiveness
+      currentRotation.current.x += (targetRotation.current.x - currentRotation.current.x) * 0.08;
+      currentRotation.current.y += (targetRotation.current.y - currentRotation.current.y) * 0.08;
 
       particles.forEach((particle, i) => {
-        // Apply rotation based on mouse position and scroll
-        const scrollRotation = scrollOffset.current * 0.0005 * (1 - transitionFactor);
-        const totalRotationY = currentRotation.current.y + scrollRotation;
-        const totalRotationX = currentRotation.current.x + scrollRotation * 0.5;
+        // Apply smooth continuous rotation without scroll influence
+        const rotatedX = particle.x * Math.cos(currentRotation.current.y) - particle.z * Math.sin(currentRotation.current.y);
+        const rotatedZ = particle.x * Math.sin(currentRotation.current.y) + particle.z * Math.cos(currentRotation.current.y);
+        const rotatedY = particle.y * Math.cos(currentRotation.current.x) - rotatedZ * Math.sin(currentRotation.current.x);
+        const finalZ = particle.y * Math.sin(currentRotation.current.x) + rotatedZ * Math.cos(currentRotation.current.x);
 
-        const rotatedX = particle.x * Math.cos(totalRotationY) - particle.z * Math.sin(totalRotationY);
-        const rotatedZ = particle.x * Math.sin(totalRotationY) + particle.z * Math.cos(totalRotationY);
-        const rotatedY = particle.y * Math.cos(totalRotationX) - rotatedZ * Math.sin(totalRotationX);
-        const finalZ = particle.y * Math.sin(totalRotationX) + rotatedZ * Math.cos(totalRotationX);
-
-        // Perspective projection with scroll offset
+        // Perspective projection - keep network centered
         const perspective = 800;
         const scale = perspective / (perspective + finalZ);
         
-        // Add displacement effect when scrolling - moves away and returns smoothly
-        const displacementX = transitionFactor * 100 * Math.sin(scrollInfluence * 0.01);
-        const displacementY = transitionFactor * 150;
-        
-        const x2d = rotatedX * scale + canvas.width / 2 + Math.sin(scrollInfluence * 0.01) * 20 + displacementX;
-        const y2d = rotatedY * scale + canvas.height / 2 - scrollInfluence - displacementY;
+        const x2d = rotatedX * scale + canvas.width / 2;
+        const y2d = rotatedY * scale + canvas.height / 2;
 
-        // Draw particle with fade effect based on scroll
+        // Draw particle with consistent visibility - no scroll-based fading
         const alpha = Math.max(0, Math.min(1, (1500 - Math.abs(finalZ)) / 1500));
-        const scrollFade = 1 - (transitionFactor * 0.5); // Fade to 50% when fully scrolled
-        ctx.fillStyle = `rgba(106, 47, 232, ${alpha * 0.9 * scrollFade})`;
+        ctx.fillStyle = `rgba(106, 47, 232, ${alpha * 0.9})`;
         ctx.beginPath();
         ctx.arc(x2d, y2d, 2 * scale, 0, Math.PI * 2);
         ctx.fill();
@@ -125,14 +108,14 @@ const Hero = () => {
         // Draw connections
         particles.forEach((particle2, j) => {
           if (i < j) {
-            const rotatedX2 = particle2.x * Math.cos(totalRotationY) - particle2.z * Math.sin(totalRotationY);
-            const rotatedZ2 = particle2.x * Math.sin(totalRotationY) + particle2.z * Math.cos(totalRotationY);
-            const rotatedY2 = particle2.y * Math.cos(totalRotationX) - rotatedZ2 * Math.sin(totalRotationX);
-            const finalZ2 = particle2.y * Math.sin(totalRotationX) + rotatedZ2 * Math.cos(totalRotationX);
+            const rotatedX2 = particle2.x * Math.cos(currentRotation.current.y) - particle2.z * Math.sin(currentRotation.current.y);
+            const rotatedZ2 = particle2.x * Math.sin(currentRotation.current.y) + particle2.z * Math.cos(currentRotation.current.y);
+            const rotatedY2 = particle2.y * Math.cos(currentRotation.current.x) - rotatedZ2 * Math.sin(currentRotation.current.x);
+            const finalZ2 = particle2.y * Math.sin(currentRotation.current.x) + rotatedZ2 * Math.cos(currentRotation.current.x);
 
             const scale2 = perspective / (perspective + finalZ2);
-            const x2d2 = rotatedX2 * scale2 + canvas.width / 2 + Math.sin(scrollInfluence * 0.01) * 20 + displacementX;
-            const y2d2 = rotatedY2 * scale2 + canvas.height / 2 - scrollInfluence - displacementY;
+            const x2d2 = rotatedX2 * scale2 + canvas.width / 2;
+            const y2d2 = rotatedY2 * scale2 + canvas.height / 2;
 
             const dx = particle.x - particle2.x;
             const dy = particle.y - particle2.y;
@@ -140,7 +123,7 @@ const Hero = () => {
             const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
             if (distance < 250) {
-              const lineAlpha = (1 - distance / 250) * alpha * 0.45 * scrollFade;
+              const lineAlpha = (1 - distance / 250) * alpha * 0.45;
               ctx.strokeStyle = `rgba(106, 47, 232, ${lineAlpha})`;
               ctx.lineWidth = 1.2;
               ctx.beginPath();
@@ -151,7 +134,7 @@ const Hero = () => {
           }
         });
 
-        // Update particle position
+        // Update particle position - continuous animation
         particle.x += particle.vx;
         particle.y += particle.vy;
         particle.z += particle.vz;

@@ -93,7 +93,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-32 px-6 relative">
+    <section id="contact" className="py-32 md:px-6 relative">
       {/* Loading GIF Overlay */}
       {showLoadingGif && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -113,7 +113,7 @@ const Contact = () => {
         </div>
       )}
 
-      <div className="container mx-auto max-w-6xl" ref={ref}>
+      <div className="container mx-auto max-w-6xl pl-[2px] pr-[2px]" ref={ref}>
         <div className="text-center mb-20">
           <h2 className="text-5xl font-bold mb-6 gradient-text">Get In Touch</h2>
           <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
@@ -124,7 +124,7 @@ const Contact = () => {
         {/* Second Section: Contact Details and GIF */}
         <div className="grid md:grid-cols-2 gap-12 mb-12 items-center">
           {/* Contact Details */}
-          <div className="space-y-6 mx-auto w-full max-w-md md:max-w-none">
+          <div className="space-y-6 w-full">
             {/* Contact Info Cards */}
             {contactInfo.map((info, index) => (
               <a
@@ -132,14 +132,14 @@ const Contact = () => {
                 href={info.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card p-6 rounded-2xl flex items-start gap-6 group cursor-pointer shine hover:glow-violet transition-all duration-300 block"
+                className="glass-card py-6 pl-4 pr-4 md:px-6 rounded-2xl flex items-center gap-6 group cursor-pointer shine hover:glow-violet transition-all duration-300 block"
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center glow-violet group-hover:glow-violet-intense transition-all duration-300 flex-shrink-0">
                   <info.icon className="w-6 h-6 text-primary" />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <p className="text-sm text-foreground/60 mb-2">{info.label}</p>
-                  <p className="text-lg font-semibold group-hover:gradient-text transition-all duration-300">
+                  <p className="text-lg font-semibold group-hover:gradient-text transition-all duration-300 break-words">
                     {info.value}
                   </p>
                 </div>
@@ -149,11 +149,11 @@ const Contact = () => {
           </div>
 
           {/* Contact Us GIF */}
-          <div className="flex items-center justify-center mx-auto w-full max-w-md md:max-w-none">
+          <div className="flex items-center justify-center w-full">
             <img 
               src="/contactus.gif" 
               alt="Contact Us" 
-              className="w-full h-auto max-w-md object-contain"
+              className="w-full h-auto max-w-md object-contain mx-auto"
             />
           </div>
         </div>
@@ -161,7 +161,7 @@ const Contact = () => {
         {/* Third Section: Full Width Form */}
         <div className="glass-card p-8 rounded-2xl">
           <h3 className="text-3xl font-bold mb-8 gradient-text text-center">Send Us a Message</h3>
-          <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
+          <form onSubmit={handleSubmit} className="space-y-6 max-w-5xl mx-auto">
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <Input

@@ -8,7 +8,7 @@ const About = () => {
 
   return (
     <section id="about" className="py-32 px-6 relative animated-gradient">
-      <div className="container mx-auto max-w-6xl" ref={ref}>
+      <div className="container mx-auto max-w-6xl" style={{ padding: '0px' }} ref={ref}>
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-5xl font-bold mb-6 gradient-text">About Us</h2>
