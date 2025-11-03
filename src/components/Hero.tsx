@@ -100,9 +100,9 @@ const Hero = () => {
 
         // Draw particle with consistent visibility - no scroll-based fading
         const alpha = Math.max(0, Math.min(1, (1500 - Math.abs(finalZ)) / 1500));
-        ctx.fillStyle = `rgba(106, 47, 232, ${alpha * 0.9})`;
+        ctx.fillStyle = `rgba(106, 47, 232, ${alpha * 1.0})`;
         ctx.beginPath();
-        ctx.arc(x2d, y2d, 2 * scale, 0, Math.PI * 2);
+        ctx.arc(x2d, y2d, 2.5 * scale, 0, Math.PI * 2);
         ctx.fill();
 
         // Draw connections
