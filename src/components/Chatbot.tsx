@@ -222,7 +222,7 @@ const Chatbot = () => {
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <img src="/AI.gif" alt="AI Assistant" className="h-24 w-24" />
+                <img src="/AI.gif" alt="AI Assistant" className="h-14 w-14" />
               </motion.div>
             )}
           </AnimatePresence>

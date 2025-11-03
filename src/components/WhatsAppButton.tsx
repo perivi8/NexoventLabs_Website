@@ -19,7 +19,8 @@ const WhatsAppButton = () => {
         size="icon"
         aria-label="Contact us on WhatsApp"
       >
-        <img src="/whatsapp.gif" alt="WhatsApp" className="h-16 w-16" />
+        <img src="/whatsapp.gif" alt="WhatsApp" className="h-10 w-10
+        " />
       </Button>
     </div>
   );
