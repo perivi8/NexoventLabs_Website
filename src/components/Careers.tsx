@@ -11,7 +11,7 @@ const Careers = () => {
   const jobs = [
     {
       title: 'Senior ML Engineer',
-      location: 'San Francisco, CA',
+      location: 'Chennai, Tamil Nadu',
       type: 'Full-time',
       description: 'Build cutting-edge ML models for real-world applications.',
     },
@@ -23,13 +23,13 @@ const Careers = () => {
     },
     {
       title: 'Data Engineer',
-      location: 'New York, NY',
+      location: 'Chennai, Tamil Nadu',
       type: 'Full-time',
       description: 'Design and maintain scalable data infrastructure.',
     },
     {
       title: 'AI Product Manager',
-      location: 'London, UK',
+      location: 'Chennai, Tamil Nadu',
       type: 'Full-time',
       description: 'Lead product strategy for AI-powered solutions.',
     },

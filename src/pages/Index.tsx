@@ -7,6 +7,7 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 
 // Lazy load components below the fold for better performance
 const About = lazy(() => import('@/components/About'));
+const WhyChoose = lazy(() => import('@/components/WhyChoose'));
 const Services = lazy(() => import('@/components/Services'));
 const Projects = lazy(() => import('@/components/Projects'));
 const Team = lazy(() => import('@/components/Team'));
@@ -23,6 +24,7 @@ const Index = () => {
         <Hero />
         <Suspense fallback={<div className="min-h-screen" />}>
           <About />
+          <WhyChoose />
           <Services />
           <Projects />
           <Team />
