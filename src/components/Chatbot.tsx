@@ -194,12 +194,9 @@ const Chatbot = () => {
   return (
     <>
       {/* Chatbot Toggle Button */}
-      <motion.div
+      <div
         ref={buttonRef}
         className="fixed bottom-3 right-1 md:right-6 z-50"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}
       >
         <Button
           onClick={() => setIsOpen(!isOpen)}
@@ -230,7 +227,7 @@ const Chatbot = () => {
             )}
           </AnimatePresence>
         </Button>
-      </motion.div>
+      </div>
 
       {/* Chatbot Window */}
       <AnimatePresence>

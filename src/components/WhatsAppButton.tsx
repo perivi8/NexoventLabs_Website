@@ -12,12 +12,7 @@ const WhatsAppButton = () => {
   };
 
   return (
-    <motion.div
-      className="fixed bottom-8 left-2 md:bottom-8 md:left-6 z-50"
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}
-    >
+    <div className="fixed bottom-8 left-2 md:bottom-8 md:left-6 z-50">
       <Button
         onClick={handleWhatsAppClick}
         className="h-16 w-16 rounded-full bg-transparent border-0 hover:bg-transparent hover:scale-110 transition-all duration-300 p-0"
@@ -26,7 +21,7 @@ const WhatsAppButton = () => {
       >
         <img src="/whatsapp.gif" alt="WhatsApp" className="h-16 w-16" />
       </Button>
-    </motion.div>
+    </div>
   );
 };
 

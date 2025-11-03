@@ -76,14 +76,11 @@ const Navbar = () => {
   };
 
   return (
-    <motion.nav
+    <nav
       ref={mobileMenuRef}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled ? 'glass py-4' : 'bg-transparent py-6'
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <motion.div
@@ -98,7 +95,7 @@ const Navbar = () => {
           {navLinks.map((link, index) => {
             const isActive = activeSection === link.href.replace('#', '');
             return (
-              <motion.button
+              <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
                 className={`relative transition-colors group ${
@@ -106,9 +103,6 @@ const Navbar = () => {
                     ? 'text-primary font-semibold'
                     : 'text-foreground/80 hover:text-foreground'
                 }`}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
               >
                 {link.name}
                 <span
@@ -116,7 +110,7 @@ const Navbar = () => {
                     isActive ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}
                 ></span>
-              </motion.button>
+              </button>
             );
           })}
         </div>
@@ -166,7 +160,7 @@ const Navbar = () => {
           {navLinks.map((link, index) => {
             const isActive = activeSection === link.href.replace('#', '');
             return (
-              <motion.button
+              <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
                 className={`w-full text-left px-6 py-4 transition-colors border-b border-white/10 last:border-b-0 ${
@@ -174,17 +168,14 @@ const Navbar = () => {
                     ? 'text-primary font-semibold bg-primary/10'
                     : 'text-foreground/80 hover:text-foreground hover:bg-white/5'
                 }`}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.05 }}
               >
                 {link.name}
-              </motion.button>
+              </button>
             );
           })}
         </div>
       </motion.div>
-    </motion.nav>
+    </nav>
   );
 };
 

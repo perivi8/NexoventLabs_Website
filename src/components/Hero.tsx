@@ -175,29 +175,15 @@ const Hero = () => {
       />
 
       <div className="relative z-10 text-center px-6 max-w-5xl">
-        <motion.h1
-          className="text-6xl md:text-8xl font-bold mb-6 gradient-text"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
+        <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text">
           Innovation Meets Intelligence.
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          className="text-xl md:text-2xl text-foreground/70 mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-        >
+        <p className="text-xl md:text-2xl text-foreground/70 mb-12">
           Empowering businesses with next-generation AI solutions.
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-        >
+        <div>
           <Button
             size="lg"
             className="glass-card glow-violet-intense hover:scale-105 transition-transform duration-300 px-8 py-6 text-lg shine"
@@ -205,7 +191,7 @@ const Hero = () => {
           >
             Explore Solutions
           </Button>
-        </motion.div>
+        </div>
       </div>
 
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
