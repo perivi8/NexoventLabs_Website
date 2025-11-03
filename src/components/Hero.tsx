@@ -36,9 +36,9 @@ const Hero = () => {
         x: Math.random() * canvas.width * 1.5 - canvas.width * 0.75,
         y: Math.random() * canvas.height * 1.5 - canvas.height * 0.75,
         z: Math.random() * 1500 - 250,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        vz: (Math.random() - 0.5) * 0.3,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        vz: (Math.random() - 0.5) * 0.6,
       });
     }
 

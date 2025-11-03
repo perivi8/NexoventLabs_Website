@@ -58,19 +58,18 @@ All colors MUST be HSL.
   }
 
   .glass-card {
-    background: rgba(20, 20, 35, 0.4);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(106, 47, 232, 0.15);
-    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    background: rgba(20, 20, 35, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(106, 47, 232, 0.2);
+    transition: backdrop-filter 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
     transform: translateZ(0);
     will-change: transform;
   }
 
   .glass-card:hover {
-    background: rgba(20, 20, 35, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(106, 47, 232, 0.4);
   }
 
@@ -107,6 +106,36 @@ All colors MUST be HSL.
     display: inline-block;
     line-height: 1.2;
     padding-bottom: 0.1em;
+  }
+
+  /* Animated gradient text for logo */
+  .gradient-text-animated {
+    background: linear-gradient(
+      90deg,
+      #fff 0%,
+      #a78bfa 25%,
+      #6A2FE8 50%,
+      #8B5CF6 75%,
+      #fff 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-flow 3s ease-in-out infinite;
+    display: inline-block;
+    line-height: 1.2;
+    padding-bottom: 0.1em;
+    will-change: background-position;
+  }
+
+  @keyframes gradient-flow {
+    0%, 100% {
+      background-position: 0% center;
+    }
+    50% {
+      background-position: 100% center;
+    }
   }
 
   /* Animated gradient background - optimized */

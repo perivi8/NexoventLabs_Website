@@ -84,7 +84,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <motion.div
-          className="text-2xl font-bold gradient-text cursor-pointer"
+          className="text-2xl font-bold gradient-text-animated cursor-pointer"
           whileHover={{ scale: 1.05 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
