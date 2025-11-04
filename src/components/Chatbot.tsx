@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { ScrollArea } from './ui/scroll-area';
 import { toast } from 'sonner';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface Message {
   id: string;
@@ -14,6 +15,7 @@ interface Message {
 }
 
 const Chatbot = () => {
+  const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -222,7 +224,7 @@ const Chatbot = () => {
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <img src="/AI.gif" alt="AI Assistant" className="h-14 w-14" />
+                <img src={theme === 'light' ? '/AI1.gif' : '/AI.gif'} alt="AI Assistant" className="h-16 w-16" />
               </motion.div>
             )}
           </AnimatePresence>

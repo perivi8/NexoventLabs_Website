@@ -25,11 +25,11 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="flex justify-center px-6">
           {team.map((member, index) => (
             <div
               key={member.name}
-              className="glass-card rounded-2xl overflow-hidden group cursor-pointer shine hover:glow-violet transition-all duration-300"
+              className="glass-card rounded-2xl overflow-hidden group cursor-pointer shine hover:glow-violet transition-all duration-300 w-full max-w-md"
             >
               <div className="aspect-square bg-gradient-to-br from-primary/30 to-primary/10 relative overflow-hidden flex items-center justify-center">
                 <motion.div
