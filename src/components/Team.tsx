@@ -17,7 +17,7 @@ const Team = () => {
 
   return (
     <section id="team" className="py-32 px-0 relative">
-      <div className="container mx-auto max-w-7xl" ref={ref}>
+      <div className="container mx-auto max-w-7xl" style={{ padding: '0px' }} ref={ref}>
         <div className="text-center mb-20">
           <h2 className="text-5xl font-bold mb-6 gradient-text">Our Team</h2>
           <p className="text-xl text-foreground/70 max-w-2xl mx-auto">

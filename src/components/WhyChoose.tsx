@@ -74,7 +74,7 @@ const WhyChoose = () => {
 
   return (
     <section id="why-choose" className="pt-32 pb-0 px-6 relative bg-background">
-      <div className="container mx-auto max-w-6xl" ref={ref}>
+      <div className="container mx-auto max-w-6xl" style={{ padding: '0px' }} ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
