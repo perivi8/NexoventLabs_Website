@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { Button } from './ui/button';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Hero = () => {
+  const { theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mousePos = useRef({ x: 0, y: 0 });
   const targetRotation = useRef({ x: 0, y: 0 });
@@ -76,8 +78,9 @@ const Hero = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     const animate = () => {
-      // Use fully opaque black to prevent fade-out and disappearing
-      ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+      // Use theme-appropriate background color
+      const bgColor = theme === 'light' ? 'rgba(250, 250, 255, 1)' : 'rgba(0, 0, 0, 1)';
+      ctx.fillStyle = bgColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Smooth rotation interpolation - increased for better responsiveness
@@ -100,7 +103,8 @@ const Hero = () => {
 
         // Draw particle with consistent visibility - no scroll-based fading
         const alpha = Math.max(0, Math.min(1, (1500 - Math.abs(finalZ)) / 1500));
-        ctx.fillStyle = `rgba(106, 47, 232, ${alpha * 1.0})`;
+        const particleColor = theme === 'light' ? `rgba(91, 33, 182, ${alpha * 0.8})` : `rgba(106, 47, 232, ${alpha * 1.0})`;
+        ctx.fillStyle = particleColor;
         ctx.beginPath();
         ctx.arc(x2d, y2d, 2.5 * scale, 0, Math.PI * 2);
         ctx.fill();
@@ -124,7 +128,8 @@ const Hero = () => {
 
             if (distance < 250) {
               const lineAlpha = (1 - distance / 250) * alpha * 0.45;
-              ctx.strokeStyle = `rgba(106, 47, 232, ${lineAlpha})`;
+              const lineColor = theme === 'light' ? `rgba(91, 33, 182, ${lineAlpha * 0.7})` : `rgba(106, 47, 232, ${lineAlpha})`;
+              ctx.strokeStyle = lineColor;
               ctx.lineWidth = 1.2;
               ctx.beginPath();
               ctx.moveTo(x2d, y2d);
@@ -164,14 +169,14 @@ const Hero = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ background: '#000000' }}
+        style={{ background: theme === 'light' ? '#fafaff' : '#000000' }}
       />
 
       <div className="relative z-10 text-center px-6 max-w-5xl">

@@ -44,6 +44,42 @@ All colors MUST be HSL.
     --glass-bg: 264 50% 8%;
     --glass-border: 264 40% 20%;
   }
+
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 264 71% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 264 71% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 264 71% 10%;
+
+    --primary: 264 71% 56%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 264 10% 90%;
+    --secondary-foreground: 264 71% 10%;
+
+    --muted: 264 10% 95%;
+    --muted-foreground: 264 10% 40%;
+
+    --accent: 264 71% 56%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 264 20% 85%;
+    --input: 264 20% 85%;
+    --ring: 264 71% 56%;
+
+    /* Custom design tokens for light theme */
+    --glow-primary: 264 71% 56%;
+    --glow-secondary: 280 80% 70%;
+    --glass-bg: 0 0% 100%;
+    --glass-border: 264 20% 80%;
+  }
 }
 
 @layer utilities {
@@ -57,6 +93,11 @@ All colors MUST be HSL.
     will-change: transform;
   }
 
+  .light .glass {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(106, 47, 232, 0.3);
+  }
+
   .glass-card {
     background: rgba(20, 20, 35, 0.3);
     backdrop-filter: blur(12px);
@@ -65,6 +106,11 @@ All colors MUST be HSL.
     transition: backdrop-filter 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
     transform: translateZ(0);
     will-change: transform;
+  }
+
+  .light .glass-card {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(106, 47, 232, 0.3);
   }
 
   .glass-card:hover {
@@ -80,10 +126,20 @@ All colors MUST be HSL.
     transform: translateZ(0);
   }
 
+  .light .glow-violet {
+    box-shadow: 0 0 15px rgba(106, 47, 232, 0.4),
+                0 0 30px rgba(106, 47, 232, 0.3);
+  }
+
   .glow-violet-intense {
     box-shadow: 0 0 30px rgba(106, 47, 232, 0.6),
                 0 0 60px rgba(106, 47, 232, 0.4);
     transform: translateZ(0);
+  }
+
+  .light .glow-violet-intense {
+    box-shadow: 0 0 25px rgba(106, 47, 232, 0.5),
+                0 0 50px rgba(106, 47, 232, 0.35);
   }
 
   .glow-green-intense {
@@ -97,6 +153,11 @@ All colors MUST be HSL.
                  0 0 40px rgba(106, 47, 232, 0.3);
   }
 
+  .light .text-glow {
+    text-shadow: 0 0 15px rgba(106, 47, 232, 0.3),
+                 0 0 30px rgba(106, 47, 232, 0.2);
+  }
+
   /* Gradient text */
   .gradient-text {
     background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #6A2FE8 100%);
@@ -106,6 +167,13 @@ All colors MUST be HSL.
     display: inline-block;
     line-height: 1.2;
     padding-bottom: 0.1em;
+  }
+
+  .light .gradient-text {
+    background: linear-gradient(135deg, #1a0a2e 0%, #6A2FE8 50%, #8B5CF6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   /* Animated gradient text for logo */
@@ -127,6 +195,22 @@ All colors MUST be HSL.
     line-height: 1.2;
     padding-bottom: 0.1em;
     will-change: background-position;
+  }
+
+  .light .gradient-text-animated {
+    background: linear-gradient(
+      90deg,
+      #1a0a2e 0%,
+      #5B21B6 25%,
+      #6A2FE8 50%,
+      #5B21B6 75%,
+      #1a0a2e 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-flow 3s ease-in-out infinite;
   }
 
   @keyframes gradient-flow {
@@ -220,6 +304,60 @@ All colors MUST be HSL.
     100% {
       background-position: -100% 0;
     }
+  }
+
+  /* Light theme text and heading styles */
+  .light h1,
+  .light h2,
+  .light h3,
+  .light h4,
+  .light h5,
+  .light h6 {
+    color: hsl(264, 71%, 15%);
+  }
+
+  .light p {
+    color: hsl(264, 20%, 25%);
+  }
+
+  .light .text-foreground {
+    color: hsl(264, 71%, 15%) !important;
+  }
+
+  .light .text-foreground\/80 {
+    color: hsl(264, 40%, 30%) !important;
+  }
+
+  .light .text-foreground\/60 {
+    color: hsl(264, 30%, 40%) !important;
+  }
+
+  .light .text-muted-foreground {
+    color: hsl(264, 20%, 45%) !important;
+  }
+
+  /* Light theme animated gradient background */
+  .light .animated-gradient {
+    background: linear-gradient(
+      135deg,
+      rgba(106, 47, 232, 0.08) 0%,
+      rgba(139, 92, 246, 0.04) 50%,
+      rgba(106, 47, 232, 0.08) 100%
+    );
+  }
+
+  /* Ensure button text is visible in light mode */
+  .light button {
+    color: hsl(264, 71%, 15%);
+  }
+
+  .light button.glass,
+  .light button.glass-card {
+    color: hsl(264, 71%, 15%) !important;
+  }
+
+  .light button:hover {
+    color: hsl(0, 0%, 98%) !important;
   }
 }
 
@@ -322,5 +460,19 @@ All colors MUST be HSL.
   * {
     scrollbar-width: thin;
     scrollbar-color: #6A2FE8 rgba(15, 15, 25, 0.8);
+  }
+
+  /* Light theme scrollbar */
+  .light ::-webkit-scrollbar-track {
+    background: rgba(240, 240, 250, 0.8);
+    border: 1px solid rgba(106, 47, 232, 0.2);
+  }
+
+  .light ::-webkit-scrollbar-thumb {
+    border: 2px solid rgba(240, 240, 250, 0.8);
+  }
+
+  .light * {
+    scrollbar-color: #6A2FE8 rgba(240, 240, 250, 0.8);
   }
 }
