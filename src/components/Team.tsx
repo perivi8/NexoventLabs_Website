@@ -10,8 +10,17 @@ const Team = () => {
   const team = [
     {
       name: 'Perivi Harikrishna',
-      role: 'Chief AI Officer',
-      expertise: 'Deep Learning & Neural Networks',
+      role: 'Founder',
+      expertise: 'ML & Full stack Developer',
+      image: '/1.JPG',
+      description: '2 years of experience in Machine Learning and AI development. Passionate about building intelligent systems and innovative solutions that solve real-world problems.',
+    },
+    {
+      name: 'Gali Vijay',
+      role: 'Co-Founder',
+      expertise: 'Frontend Developer',
+      image: '/2.png',
+      description: '1 year of experience as a Frontend Developer. Specializes in creating beautiful, responsive user interfaces with modern web technologies and frameworks.',
     },
   ];
 
@@ -25,23 +34,23 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="flex justify-center px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 max-w-5xl mx-auto">
           {team.map((member, index) => (
             <div
               key={member.name}
-              className="glass-card rounded-2xl overflow-hidden group cursor-pointer shine hover:glow-violet transition-all duration-300 w-full max-w-md"
+              className="glass-card rounded-2xl overflow-hidden group cursor-pointer shine hover:glow-violet transition-all duration-300"
             >
-              <div className="aspect-square bg-gradient-to-br from-primary/30 to-primary/10 relative overflow-hidden flex items-center justify-center">
+              <div className="h-64 bg-gradient-to-br from-primary/30 to-primary/10 relative overflow-hidden flex items-center justify-center">
                 <motion.div
-                  className="w-32 h-32 rounded-full bg-primary/20 glow-violet relative"
+                  className="w-32 h-32 rounded-full overflow-hidden glow-violet relative"
                   whileHover={{ scale: 1.2 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-4xl font-bold gradient-text leading-none">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
+                  <img 
+                    src={member.image} 
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
                 </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               </div>
@@ -50,7 +59,8 @@ const Team = () => {
                   {member.name}
                 </h3>
                 <p className="text-primary text-sm font-semibold mb-2">{member.role}</p>
-                <p className="text-foreground/60 text-sm mb-4">{member.expertise}</p>
+                <p className="text-foreground/60 text-sm mb-3">{member.expertise}</p>
+                <p className="text-foreground/50 text-sm mb-4 leading-relaxed">{member.description}</p>
                 <div className="flex gap-3">
                   <motion.button
                     whileHover={{ scale: 1.2 }}
