@@ -60,8 +60,10 @@ const Chatbot = () => {
     };
   }, [isOpen]);
 
-  // Check backend connection on mount - prioritizes env variable, then production, then localhost
+  // Check backend connection only when chatbot is opened - deferred to avoid blocking initial page load
   useEffect(() => {
+    if (!isOpen || connectionStatus !== 'checking') return;
+
     const checkConnection = async () => {
       const urls = [
         import.meta.env.VITE_API_URL,
@@ -90,8 +92,11 @@ const Chatbot = () => {
       setConnectionStatus('disconnected');
       console.error('❌ All backend URLs failed');
     };
-    checkConnection();
-  }, []);
+    
+    // Defer the check slightly to not block rendering
+    const timeoutId = setTimeout(checkConnection, 100);
+    return () => clearTimeout(timeoutId);
+  }, [isOpen, connectionStatus]);
 
   const sendMessage = async () => {
     if (!inputMessage.trim()) return;
