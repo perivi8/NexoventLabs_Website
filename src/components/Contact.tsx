@@ -6,7 +6,6 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { toast } from 'sonner';
-import OptimizedVideo from './OptimizedVideo';
 
 const Contact = () => {
   const ref = useRef(null);
@@ -104,12 +103,10 @@ const Contact = () => {
             exit={{ opacity: 0, scale: 0.8 }}
             className="flex flex-col items-center gap-4"
           >
-            <OptimizedVideo
-              src="/send"
-              fallbackGif="/send.gif"
-              alt="Sending message..."
+            <img 
+              src="/send.gif" 
+              alt="Sending message..." 
               className="w-48 h-48 object-contain"
-              lazy={false}
             />
             <p className="text-white text-xl font-semibold">Sending your message...</p>
           </motion.div>

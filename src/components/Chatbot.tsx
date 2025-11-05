@@ -6,7 +6,6 @@ import { Input } from './ui/input';
 import { ScrollArea } from './ui/scroll-area';
 import { toast } from 'sonner';
 import { useTheme } from '@/contexts/ThemeContext';
-import OptimizedVideo from './OptimizedVideo';
 
 interface Message {
   id: string;
@@ -230,13 +229,7 @@ const Chatbot = () => {
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <OptimizedVideo
-                  src={theme === 'light' ? '/AI1' : '/AI'}
-                  fallbackGif={theme === 'light' ? '/AI1.gif' : '/AI.gif'}
-                  alt="AI Assistant"
-                  className="h-16 w-16 object-cover rounded-full"
-                  lazy={false}
-                />
+                <img src={theme === 'light' ? '/AI1.gif' : '/AI.gif'} alt="AI Assistant" className="h-16 w-16" />
               </motion.div>
             )}
           </AnimatePresence>

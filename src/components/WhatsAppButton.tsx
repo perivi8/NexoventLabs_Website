@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
-import OptimizedVideo from './OptimizedVideo';
 
 const WhatsAppButton = () => {
   // Replace with your actual WhatsApp number (format: country code + number, no spaces or special characters)
@@ -20,13 +19,8 @@ const WhatsAppButton = () => {
         size="icon"
         aria-label="Contact us on WhatsApp"
       >
-        <OptimizedVideo
-          src="/whatsapp"
-          fallbackGif="/whatsapp.gif"
-          alt="WhatsApp"
-          className="h-10 w-10 object-cover rounded-full"
-          lazy={false}
-        />
+        <img src="/whatsapp.gif" alt="WhatsApp" className="h-10 w-10
+        " />
       </Button>
     </div>
   );
