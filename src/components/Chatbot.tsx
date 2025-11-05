@@ -6,6 +6,7 @@ import { Input } from './ui/input';
 import { ScrollArea } from './ui/scroll-area';
 import { toast } from 'sonner';
 import { useTheme } from '@/contexts/ThemeContext';
+import { generateDynamicKnowledge } from '@/lib/websiteDataExtractor';
 
 interface Message {
   id: string;
@@ -122,11 +123,18 @@ const Chatbot = () => {
         'http://localhost:3001'
       ].filter(Boolean);
 
-      // Send conversation history for context (last 5 messages)
-      const recentHistory = messages.slice(-5).map(msg => ({
+      // Send minimal conversation history (last 3 messages only) to prevent AI from using old cached data
+      // This ensures the AI prioritizes fresh knowledge over conversation context
+      const recentHistory = messages.slice(-3).map(msg => ({
         sender: msg.sender,
         text: msg.text
       }));
+
+      // Generate dynamic knowledge from current website data
+      // This ensures the chatbot ALWAYS has the latest information from the website
+      const dynamicKnowledge = generateDynamicKnowledge();
+      console.log('🔄 Generated fresh dynamic knowledge at:', new Date().toISOString());
+      console.log('📊 Knowledge size:', dynamicKnowledge.length, 'characters');
 
       let lastError = null;
       
@@ -141,7 +149,8 @@ const Chatbot = () => {
             },
             body: JSON.stringify({
               message: inputMessage,
-              conversationHistory: recentHistory
+              conversationHistory: recentHistory,
+              websiteKnowledge: dynamicKnowledge // Send live website data
             }),
             signal: AbortSignal.timeout(10000) // 10 second timeout
           });

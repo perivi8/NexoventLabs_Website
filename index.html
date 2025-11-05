@@ -18,8 +18,6 @@
     <!-- Optimized font loading - async with font-display swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Preload only the most critical font weight -->
-    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2" crossorigin>
     <!-- Load font stylesheet asynchronously -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
     <noscript>
@@ -49,6 +47,12 @@
 
   <body>
     <div id="root"></div>
+    <script>
+      // Suppress React DevTools suggestion message
+      if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object') {
+        window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function() {};
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
