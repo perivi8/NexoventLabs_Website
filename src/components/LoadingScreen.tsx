@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import OptimizedVideo from './OptimizedVideo';
 
 const LoadingScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -49,10 +50,12 @@ const LoadingScreen = () => {
           }}
         >
           <div className="flex flex-col items-center justify-center gap-4 px-4">
-            <img
-              src="/send.gif"
+            <OptimizedVideo
+              src="/send"
+              fallbackGif="/send.gif"
               alt="Loading..."
               className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain"
+              lazy={false}
             />
           </div>
         </motion.div>
