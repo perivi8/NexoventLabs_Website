@@ -28,7 +28,7 @@ const Contact = () => {
     const minDisplayTime = 2000; // Minimum 2 seconds
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'https://nexoventlabs-backend.onrender.com';
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://nexoventlabs-backend-p4d9.onrender.com';
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: {

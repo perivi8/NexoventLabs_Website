@@ -68,7 +68,7 @@ const Chatbot = () => {
     const checkConnection = async () => {
       const urls = [
         import.meta.env.VITE_API_URL,
-        'https://nexoventlabs-backend.onrender.com',
+        'https://nexoventlabs-backend-p4d9.onrender.com',
         'http://localhost:3001'
       ].filter(Boolean);
 
@@ -119,7 +119,7 @@ const Chatbot = () => {
       const urls = [
         storedUrl,
         import.meta.env.VITE_API_URL,
-        'https://nexoventlabs-backend.onrender.com',
+        'https://nexoventlabs-backend-p4d9.onrender.com',
         'http://localhost:3001'
       ].filter(Boolean);
 
